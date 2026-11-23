@@ -1,0 +1,45 @@
+# One-click hosting on Render (https://render.com). Push this folder to a GitHub repo,
+# then in Render choose New > Blueprint and pick the repo. It reads this file.
+services:
+  - type: web
+    name: commission-desk
+    runtime: node
+    plan: starter            # needed for the disk below; the free plan forgets your data on restart
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    disk:
+      name: desk-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: ADMIN_TOKEN
+        generateValue: true      # Render makes a long random token; read it in the Environment tab
+      - key: POSTBACK_SECRET
+        generateValue: true
+      - key: DATA_FILE
+        value: /var/data/links.json
+      - key: MAX_DAILY_BUDGET
+        value: "20"
+      - key: ANTHROPIC_API_KEY
+        sync: false              # Render asks you for this when you create the service
+      - key: GOOGLE_ADS_DEVELOPER_TOKEN
+        sync: false
+      - key: GOOGLE_ADS_CLIENT_ID
+        sync: false
+      - key: GOOGLE_ADS_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_ADS_REFRESH_TOKEN
+        sync: false
+      - key: GOOGLE_ADS_CUSTOMER_ID
+        sync: false
+      - key: GOOGLE_ADS_API_VERSION
+        sync: false
+      - key: META_ACCESS_TOKEN
+        sync: false
+      - key: META_AD_ACCOUNT_ID
+        sync: false
+      - key: META_PAGE_ID
+        sync: false
+      - key: META_GRAPH_VERSION
+        sync: false

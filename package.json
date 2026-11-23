@@ -1,0 +1,16 @@
+{
+  "name": "commission-desk-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Click tracking, sales postbacks, and Google Ads / Meta campaign management for affiliate sites",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check src/store.js && node --check src/google.js && node --check src/meta.js"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
